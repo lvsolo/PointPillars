@@ -88,6 +88,7 @@ class PillarEncoder(nn.Module):
 
         # 5. embedding
         features = features.permute(0, 2, 1).contiguous() # (p1 + p2 + ... + pb, 9, num_points)
+        ## Point Feature Network PFN
         features = F.relu(self.bn(self.conv(features)))  # (p1 + p2 + ... + pb, out_channels, num_points)
         pooling_features = torch.max(features, dim=-1)[0] # (p1 + p2 + ... + pb, out_channels)
 
